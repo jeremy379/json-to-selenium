@@ -1,0 +1,22 @@
+{
+    "name": "jeremy379/json-to-selenium",
+    "description": "Allow to run test on selenium by sending Json file",
+    "type": "library",
+    "license": "GPL-3.0+",
+    "authors": [
+        {
+            "name": "Jérémy Dillenbourg",
+            "email": "jeremy@dillenbourg.be"
+        }
+    ],
+    "require": {
+        "php": ">=7.0.0",
+        "guzzlehttp/guzzle": "^6.3",
+        "facebook/webdriver": "^1.6"
+    },
+    "autoload": {
+        "psr-4": {
+            "Jeremy379\\JsonToSelenium\\": "src/"
+        }
+    }
+}
