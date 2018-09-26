@@ -18,7 +18,7 @@
         - ! We handle these selector: id, css (=css selector, not the class), name, linkText, xpatch
         
    - Example of a JSON
-        - If youw ant to generate it by yourself, we need these main key: url, test.commands.command, test.commands.target, test.commands.value
+        - If you want to generate it by yourself, we need these main key: url, test.commands.command, test.commands.target, test.commands.value
    
         
          {
