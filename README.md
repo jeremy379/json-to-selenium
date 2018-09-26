@@ -131,3 +131,16 @@
        | link_valid | Check if the link of the target is valid (HTTP status 200)|
            
   
+## Bugs
+
+   ### Timeout issue 
+   - If you meet timeout issue, you may have to fork facebook/webdriver and update the method `execute` in `php-webdriver/lib/Remote/HttpCommandExecutor.php`
+   - Add an unlimited time at the top of the method
+    
+    set_time_limit(0);
+    
+   - Allow curl to run longer and add just after `curl_setopt($this->curl, CURLOPT_URL, $this->url . $url);` these two lines: 
+   
+    curl_setopt($this->curl, CURLOPT_CONNECTTIMEOUT, 0);
+    curl_setopt($this->curl, CURLOPT_TIMEOUT, 400); //timeout in seconds
+    
