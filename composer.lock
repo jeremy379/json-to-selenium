@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e5bfe69a62885405c47be57c9a10d1f3",
+    "content-hash": "fe6076406a22030444ed0ce52f001b7a",
     "packages": [
         {
             "name": "facebook/webdriver",
-            "version": "1.6.0",
+            "version": "dev-community",
             "source": {
                 "type": "git",
-                "url": "https://github.com/facebook/php-webdriver.git",
-                "reference": "bd8c740097eb9f2fc3735250fc1912bc811a954e"
+                "url": "https://github.com/jeremy379/php-webdriver.git",
+                "reference": "d20bd6a3306c62b5b76f343541f89f74e3d8bb9b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/facebook/php-webdriver/zipball/bd8c740097eb9f2fc3735250fc1912bc811a954e",
-                "reference": "bd8c740097eb9f2fc3735250fc1912bc811a954e",
+                "url": "https://api.github.com/repos/jeremy379/php-webdriver/zipball/d20bd6a3306c62b5b76f343541f89f74e3d8bb9b",
+                "reference": "d20bd6a3306c62b5b76f343541f89f74e3d8bb9b",
                 "shasum": ""
             },
             "require": {
@@ -52,7 +52,31 @@
                     "Facebook\\WebDriver\\": "lib/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "autoload-dev": {
+                "psr-4": {
+                    "Facebook\\WebDriver\\": [
+                        "tests/unit",
+                        "tests/functional"
+                    ]
+                },
+                "classmap": [
+                    "tests/functional/"
+                ]
+            },
+            "scripts": {
+                "codestyle:check": [
+                    "vendor/bin/php-cs-fixer fix --diff --diff-format=udiff --dry-run -vvv --ansi",
+                    "vendor/bin/phpcs --standard=PSR2 ./lib/ ./tests/"
+                ],
+                "codestyle:fix": [
+                    "vendor/bin/php-cs-fixer fix --diff --diff-format=udiff -vvv || exit 0",
+                    "vendor/bin/phpcbf --standard=PSR2 ./lib/ ./tests/"
+                ],
+                "analyze": [
+                    "vendor/bin/parallel-lint -j 10 ./lib ./tests",
+                    "vendor/bin/phpstan.phar analyze ./lib ./tests --level 2 -c phpstan.neon --ansi"
+                ]
+            },
             "license": [
                 "Apache-2.0"
             ],
@@ -64,7 +88,12 @@
                 "selenium",
                 "webdriver"
             ],
-            "time": "2018-05-16T17:37:13+00:00"
+            "support": {
+                "issues": "https://github.com/facebook/php-webdriver/issues",
+                "forum": "https://www.facebook.com/groups/phpwebdriver/",
+                "source": "https://github.com/facebook/php-webdriver"
+            },
+            "time": "2018-09-20T13:07:56+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",
@@ -350,7 +379,9 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "facebook/webdriver": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

@@ -9,10 +9,16 @@
             "email": "jeremy@dillenbourg.be"
         }
     ],
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/jeremy379/php-webdriver"
+        }
+    ],
     "require": {
         "php": ">=7.0.0",
         "guzzlehttp/guzzle": "^6.3",
-        "facebook/webdriver": "^1.6"
+        "facebook/webdriver": "dev-community"
     },
     "autoload": {
         "psr-4": {
