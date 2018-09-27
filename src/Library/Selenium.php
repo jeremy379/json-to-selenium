@@ -37,7 +37,7 @@ class Selenium
         $height = isset($options['height']) ? $options['height'] : 767;
 
 
-        $this->driver = RemoteWebDriver::create('http://'.$host.':'.$port.'/wd/hub', $capabilities);
+        $this->driver = RemoteWebDriver::create('http://'.$host.':'.$port.'/wd/hub', $capabilities, 0, 0);
 
         if(!isset($options['keepCookies']) || $options['keepCookies'] == false) {
             $this->driver->manage()->deleteAllCookies();
