@@ -12,6 +12,9 @@ namespace Jeremy379\JsonToSelenium;
 use Facebook\WebDriver\Remote\DesiredCapabilities;
 use Facebook\WebDriver\Remote\RemoteWebDriver;
 use Facebook\WebDriver\WebDriverDimension;
+use Illuminate\Http\File;
+use Illuminate\Support\Facades\Storage;
+
 
 class Selenium
 {
@@ -19,6 +22,7 @@ class Selenium
     protected $screenshot = false;
     protected $screenshotPath;
     protected $absoluteScreenshotPath;
+    protected $storeScreenshotOnS3Bucket;
 
     /**
      * Selenium constructor.
@@ -29,6 +33,7 @@ class Selenium
      *  - keepCookies : if true, cookie are not removed before starting
      *  - width : window width in pixel
      *  - height : window height in pixel
+     *  - storeScreenshotOnS3Bucket : bool | store the screenshot on a s3 bucket via Laravel filesystem.
      */
     public function __construct($host, $options = [])
     {
@@ -36,6 +41,7 @@ class Selenium
         $port = isset($options['port']) ? $options['port'] : '4444';
         $width = isset($options['width']) ? $options['width'] : 1440;
         $height = isset($options['height']) ? $options['height'] : 767;
+        $this->storeScreenshotOnS3Bucket = isset($options['storeScreenshotOnS3Bucket']) ? $storeScreenshotOnS3Bucket : false;
 
 
         $this->driver = RemoteWebDriver::create('http://'.$host.':'.$port.'/wd/hub', $capabilities, 0, 0);
@@ -71,6 +77,10 @@ class Selenium
     public function takeScreenshotIfEnabled($step) {
         if($this->screenshot) {
             $this->getDriver()->takeScreenshot( $this->absoluteScreenshotPath . '/' . $step . '.png');
+
+            if($this->storeScreenshotOnS3Bucket) {
+                return Storage::disk('s3')->putFile('selenium-screenshot', new File($this->absoluteScreenshotPath.'/' . $step.'.png'), 'public')->url();
+            }
             return url('/') . '/'.$this->screenshotPath . '/' . $step . '.png';
         }
     }
