@@ -39,7 +39,13 @@ class Play
             $this->writeResult($step, 'target', $cmd['target']);
 
             if(method_exists($this, 'runCommand'.ucfirst($cmd['command']))) {
-                $this->{'runCommand' . ucfirst($cmd['command'])}($cmd);
+                try {
+                    $this->{'runCommand' . ucfirst($cmd['command'])}($cmd);
+                } catch (\Exception $e) {
+                    $this->writeResult($step, 'error', $e->getMessage());
+                    $this->writeResult($step, 'status', 'error');
+                    break;
+                }
             }
 
             $this->selenium->getDriver()->wait(500)->until(
