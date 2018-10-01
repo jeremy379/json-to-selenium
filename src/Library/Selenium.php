@@ -6,7 +6,7 @@
  * Time: 14:11
  */
 
-namespace App\Library\Jeremy379\JsonToSelenium;
+namespace Jeremy379\JsonToSelenium;
 
 
 use Facebook\WebDriver\Remote\DesiredCapabilities;

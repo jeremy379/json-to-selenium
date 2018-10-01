@@ -1,15 +1,9 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: jeremy.dillenbourg
- * Date: 20/09/2018
- * Time: 14:08
- */
 
-namespace App\Library\Jeremy379\JsonToSelenium\Selenium;
+namespace Jeremy379\JsonToSelenium\Selenium;
 
 
-use App\Library\Jeremy379\JsonToSelenium\Selenium;
+use Jeremy379\JsonToSelenium\Selenium;
 use Facebook\WebDriver\Exception\NoSuchElementException;
 use Facebook\WebDriver\Exception\NoSuchFrameException;
 use Facebook\WebDriver\Exception\StaleElementReferenceException;
