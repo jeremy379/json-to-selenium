@@ -41,7 +41,7 @@ class Selenium
         $port = isset($options['port']) ? $options['port'] : '4444';
         $width = isset($options['width']) ? $options['width'] : 1440;
         $height = isset($options['height']) ? $options['height'] : 767;
-        $this->storeScreenshotOnS3Bucket = isset($options['storeScreenshotOnS3Bucket']) ? $storeScreenshotOnS3Bucket : false;
+        $this->storeScreenshotOnS3Bucket = isset($options['storeScreenshotOnS3Bucket']) ? $options['storeScreenshotOnS3Bucket'] : false;
 
 
         $this->driver = RemoteWebDriver::create('http://'.$host.':'.$port.'/wd/hub', $capabilities, 0, 0);
