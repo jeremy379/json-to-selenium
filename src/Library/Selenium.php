@@ -79,7 +79,7 @@ class Selenium
             $this->getDriver()->takeScreenshot( $this->absoluteScreenshotPath . '/' . $step . '.png');
 
             if($this->storeScreenshotOnS3Bucket) {
-                return Storage::disk('s3')->putFile('selenium-screenshot', new File($this->absoluteScreenshotPath.'/' . $step.'.png'), 'public')->url();
+                return Storage::disk('s3')->putFile('selenium-screenshot', new File($this->absoluteScreenshotPath.'/' . $step.'.png'), 'public');
             }
             return url('/') . '/'.$this->screenshotPath . '/' . $step . '.png';
         }
