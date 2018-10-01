@@ -71,7 +71,7 @@ class Selenium
     public function takeScreenshotIfEnabled($step) {
         if($this->screenshot) {
             $this->getDriver()->takeScreenshot( $this->absoluteScreenshotPath . '/' . $step . '.png');
-            return url('/') . $this->screenshotPath . '/' . $step . '.png';
+            return url('/') . '/'.$this->screenshotPath . '/' . $step . '.png';
         }
     }
 
