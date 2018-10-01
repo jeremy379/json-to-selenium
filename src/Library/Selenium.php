@@ -18,6 +18,7 @@ class Selenium
     protected $driver;
     protected $screenshot = false;
     protected $screenshotPath;
+    protected $absoluteScreenshotPath;
 
     /**
      * Selenium constructor.
@@ -61,15 +62,16 @@ class Selenium
      *
      */
     public function enableScreenshot() {
-        $this->screenshotPath  = public_path('storage/screenshot/'. $this->getSessionId());
-        mkdir($this->screenshotPath);
+        $this->screenshotPath  = 'storage/screenshot/'. $this->getSessionId();
+        $this->absoluteScreenshotPath = public_path($this->screenshotPath);
+        mkdir($this->absoluteScreenshotPath);
         $this->screenshot = true;
     }
 
     public function takeScreenshotIfEnabled($step) {
         if($this->screenshot) {
-            $this->getDriver()->takeScreenshot( $this->screenshotPath . '/' . $step . '.png');
-            return $this->screenshotPath . '/' . $step . '.png';
+            $this->getDriver()->takeScreenshot( $this->absoluteScreenshotPath . '/' . $step . '.png');
+            return url('/') . $this->screenshotPath . '/' . $step . '.png';
         }
     }
 
