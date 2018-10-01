@@ -61,7 +61,7 @@ class Selenium
      *
      */
     public function enableScreenshot() {
-        $this->screenshotPath  = storage_path('app/public/screenshot/'. $this->getSessionId());
+        $this->screenshotPath  = public_path('storage/screenshot/'. $this->getSessionId());
         mkdir($this->screenshotPath);
         $this->screenshot = true;
     }
