@@ -14,7 +14,7 @@
    
    - The play JSON can be generated with the chrome extension for chrome available here https://www.seleniumhq.org/download/
    - The JSON generated can be directly send here
-        - ! We handle only the following event : open, click, select, type, selectFrame, runScript
+        - ! We handle only the following event : open, click, select, type, selectFrame, runScript, sleep (extra command to sleep x seconds before continuing)
         - ! We handle these selector: id, css (=css selector, not the class), name, linkText, xpatch
         
    - Example of a JSON

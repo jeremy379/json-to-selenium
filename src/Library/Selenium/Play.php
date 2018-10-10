@@ -101,6 +101,10 @@ class Play
         $link->sendKeys($cmd['value']);
     }
 
+    protected function runCommandSleep($cmd) {
+        sleep($cmd['target']);
+    }
+
     protected function runCommandSelectFrame($cmd) {
         $target = $cmd['target'];
 
