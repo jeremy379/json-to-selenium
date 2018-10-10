@@ -68,8 +68,6 @@ class Play
             }
 
             $this->writeResult($step, 'test', $tests);
-
-            // print the title of the current page
             $this->writeResult($step, 'page_title', $this->selenium->getDriver()->getTitle());
             $this->writeResult($step, 'screenshot', $this->selenium->takeScreenshotIfEnabled($step) );
             $this->writeResult($step, 'time_elapsed', time() - $this->startTime);
