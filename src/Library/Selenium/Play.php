@@ -113,24 +113,30 @@ class Play
             }
         }
 
-        $frame = $this->getLink($this->selenium->getDriver(), $target);
-
         sleep(3);
-        $sfi = 0;
-        do {
-            try {
-                $this->selenium->getDriver()->switchTo()->frame($frame);
-                $switched = true;
-            } catch (NoSuchFrameException $e) {
-                $switched = false;
-                sleep(1);
 
-                if($sfi > $this->selenium->getDefaultTimeoutToFindElement()) {
-                    Throw new NoSuchFrameException($e);
+        if($target == 'relative=parent') {
+            $this->selenium->getDriver()->switchTo()->defaultContent();
+        } else {
+
+            $frame = $this->getLink($this->selenium->getDriver(), $target);
+
+            $sfi = 0;
+            do {
+                try {
+                    $this->selenium->getDriver()->switchTo()->frame($frame);
+                    $switched = true;
+                } catch (NoSuchFrameException $e) {
+                    $switched = false;
+                    sleep(1);
+
+                    if ($sfi > $this->selenium->getDefaultTimeoutToFindElement()) {
+                        Throw new NoSuchFrameException($e);
+                    }
+                    $sfi++;
                 }
-                $sfi++;
-            }
-        } while(!$switched);
+            } while (!$switched);
+        }
     }
 
     protected function runCommandRunScript($cmd) {
