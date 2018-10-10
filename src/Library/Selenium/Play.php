@@ -122,7 +122,7 @@ class Play
                 $switched = false;
                 sleep(1);
 
-                if($sfi > 30) {
+                if($sfi > $this->selenium->getDefaultTimeoutToFindElement()) {
                     Throw new NoSuchFrameException($e);
                 }
                 $sfi++;
@@ -226,7 +226,7 @@ class Play
             $el = $driver->findElement(WebDriverBy::$byMethod($cleanTarget));
 
             $i = 0;
-            while (!$el->isDisplayed() && $i < 30) {
+            while (!$el->isDisplayed() && $i <  $this->selenium->getDefaultTimeoutToFindElement()) {
                 sleep(1);
                 $i++;
             }
@@ -234,7 +234,7 @@ class Play
             return $el;
         } catch( NoSuchElementException $e) {
             $ii++;
-            if($ii < 30) {
+            if($ii <  $this->selenium->getDefaultTimeoutToFindElement()) {
                 sleep(1);
                 return $this->getLink($driver, $target, $ii);
             } else {
@@ -242,7 +242,7 @@ class Play
             }
         } catch (StaleElementReferenceException $e) {
             $ii++;
-            if($ii < 30) {
+            if($ii <  $this->selenium->getDefaultTimeoutToFindElement()) {
                 sleep(1);
                 return $this->getLink($driver, $target, $ii);
             } else {

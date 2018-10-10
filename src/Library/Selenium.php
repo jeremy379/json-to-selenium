@@ -23,6 +23,7 @@ class Selenium
     protected $screenshotPath;
     protected $absoluteScreenshotPath;
     protected $storeScreenshotOnS3Bucket;
+    protected $defaultTimeoutToFindElement = 30;
 
     /**
      * Selenium constructor.
@@ -34,6 +35,7 @@ class Selenium
      *  - width : window width in pixel
      *  - height : window height in pixel
      *  - storeScreenshotOnS3Bucket : bool | store the screenshot on a s3 bucket via Laravel filesystem.
+     *  - defaultTimeoutToFindElement , number of retry to find a element (default: 30)
      */
     public function __construct($host, $options = [])
     {
@@ -42,7 +44,7 @@ class Selenium
         $width = isset($options['width']) ? $options['width'] : 1440;
         $height = isset($options['height']) ? $options['height'] : 767;
         $this->storeScreenshotOnS3Bucket = isset($options['storeScreenshotOnS3Bucket']) ? $options['storeScreenshotOnS3Bucket'] : false;
-
+        $this->defaultTimeoutToFindElement = isset($options['defaultTimeoutToFindElement']) ? $options['defaultTimeoutToFindElement'] : 30;
 
         $this->driver = RemoteWebDriver::create('http://'.$host.':'.$port.'/wd/hub', $capabilities, 0, 0);
 
@@ -89,5 +91,9 @@ class Selenium
 
     public function stop() {
         $this->getDriver()->quit();
+    }
+
+    public function getDefaultTimeoutToFindElement() {
+        return $this->defaultTimeoutToFindElement;
     }
 }
