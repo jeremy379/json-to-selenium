@@ -3,6 +3,7 @@
 namespace Jeremy379\JsonToSelenium\Selenium;
 
 
+use Facebook\WebDriver\Exception\WebDriverException;
 use Jeremy379\JsonToSelenium\Selenium;
 use Facebook\WebDriver\Exception\NoSuchElementException;
 use Facebook\WebDriver\Exception\NoSuchFrameException;
@@ -247,6 +248,14 @@ class Play
                 return $this->getLink($driver, $target, $ii);
             } else {
                 Throw new StaleElementReferenceException($e);
+            }
+        } catch (WebDriverException $e) {
+            $ii++;
+            if($ii <  $this->selenium->getDefaultTimeoutToFindElement()) {
+                sleep(1);
+                return $this->getLink($driver, $target, $ii);
+            } else {
+                Throw new WebDriverException($e);
             }
         }
     }
